@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="user-profile">
+    <div class="user-avatar">
+        <i class="fas fa-user-md"></i>
+    </div>
+    <div class="user-info">
+        <h3>Welcome, {{ user.name }}!</h3>
+        <p><i class="fas fa-envelope"></i> {{ user.email }}</p>
+        <p><i class="fas fa-user-clock"></i> Age: {{ user.age }} years</p>
+        <p><i class="fas fa-phone"></i> Contact: {{ user.contact }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><i class="fas fa-tachometer-alt"></i> Patient Dashboard</h2>
+    <p>Access our hospital stay prediction system to forecast patient hospitalization duration based on medical and personal factors.</p>
+    
+    <div style="text-align: center; margin: 2.5rem 0;">
+        <a href="{{ url_for('detection') }}" class="btn btn-primary">
+            <i class="fas fa-stethoscope"></i> Predict Hospital Stay
+        </a>
+    </div>
+    
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-md-6">
+            <div class="card" style="margin-bottom: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                <h3><i class="fas fa-lightbulb"></i> How It Works</h3>
+                <ol style="padding-left: 1.5rem; margin-top: 1rem;">
+                    <li>Enter patient details and medical information</li>
+                    <li>Our explainable AI model analyzes the data</li>
+                    <li>Receive a predicted hospital stay duration</li>
+                    <li>Get personalized recommendations to optimize recovery</li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="margin-bottom: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                <h3><i class="fas fa-database"></i> Database Integration</h3>
+                <p>All your prediction history is securely stored in our SQLite3 database. You can view your previous predictions below.</p>
+                <p style="margin-top: 1rem;"><strong>Current Database Status:</strong> Connected & Operational</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if predictions %}
+<div class="card prediction-history">
+    <h2><i class="fas fa-history"></i> Recent Predictions</h2>
+    {% for pred in predictions %}
+    <div class="prediction-item">
+        <div class="prediction-details">
+            <div><strong>Age:</strong> {{ pred.age }} | <strong>Severity:</strong> {{ pred.severity.title() }}</div>
+            <div><strong>Comorbidities:</strong> {{ pred.comorbidities }} | <strong>Predicted Stay:</strong> {{ pred.predicted_days }} days</div>
+            <div class="prediction-date">Predicted on: {{ pred.timestamp.strftime('%B %d, %Y at %H:%M') }}</div>
+        </div>
+        <div class="prediction-value">
+            {{ pred.predicted_days }} days
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

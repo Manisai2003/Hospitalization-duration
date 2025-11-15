@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-card">
+    <h2>Prediction Results</h2>
+    <div class="result-value">{{ predicted_days }}</div>
+    <p class="result-text">Based on the provided information, the predicted hospital stay duration is <strong>{{ predicted_days }} days</strong>.</p>
+    <a href="{{ url_for('detection') }}" class="btn">Make Another Prediction</a>
+</div>
+
+<div class="suggestions">
+    <h3><i class="fas fa-lightbulb"></i> Recommendations to Optimize Recovery</h3>
+    <ul class="suggestion-list">
+        {% for suggestion in suggestions %}
+        <li>{{ suggestion }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <h2><i class="fas fa-exclamation-triangle"></i> Important Precautions</h2>
+    <ul class="suggestion-list">
+        {% for precaution in precautions %}
+        <li>{{ precaution.text }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="card">
+    <h2><i class="fas fa-brain"></i> Explainable AI Insights</h2>
+    <p>Our model identified the following factors as most influential in this prediction:</p>
+    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li><strong>Age:</strong> Older patients typically require longer recovery periods</li>
+        <li><strong>Condition Severity:</strong> Higher severity correlates with extended stays</li>
+        <li><strong>Comorbidities:</strong> Additional health conditions can complicate recovery</li>
+        <li><strong>Vital Signs:</strong> Abnormal readings may indicate need for extended monitoring</li>
+    </ul>
+    <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+        <strong>Note:</strong> This prediction is based on our explainable machine learning model and should be used as a supplementary tool for clinical decision-making.
+    </p>
+</div>
+{% endblock %}

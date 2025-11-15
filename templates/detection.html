@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2><i class="fas fa-stethoscope"></i> Hospital Stay Prediction</h2>
+    <p>Enter the patient's details to predict their expected hospital stay duration.</p>
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.age.label }}
+                    {{ form.age(class="form-control", placeholder="e.g., 65") }}
+                    {% if form.age.errors %}
+                        <div class="text-danger" style="color: var(--danger); margin-top: 0.5rem;">
+                            {% for error in form.age.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.severity.label }}
+                    {{ form.severity(class="form-control") }}
+                    {% if form.severity.errors %}
+                        <div class="text-danger" style="color: var(--danger); margin-top: 0.5rem;">
+                            {% for error in form.severity.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.comorbidities.label }}
+                    {{ form.comorbidities(class="form-control", placeholder="e.g., 2") }}
+                    {% if form.comorbidities.errors %}
+                        <div class="text-danger" style="color: var(--danger); margin-top: 0.5rem;">
+                            {% for error in form.comorbidities.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.temperature.label }}
+                    {{ form.temperature(class="form-control", placeholder="e.g., 98.6") }}
+                    {% if form.temperature.errors %}
+                        <div class="text-danger" style="color: var(--danger); margin-top: 0.5rem;">
+                            {% for error in form.temperature.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.blood_pressure.label }}
+                    {{ form.blood_pressure(class="form-control", placeholder="e.g., 120/80") }}
+                    {% if form.blood_pressure.errors %}
+                        <div class="text-danger" style="color: var(--danger); margin-top: 0.5rem;">
+                            {% for error in form.blood_pressure.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.oxygen_saturation.label }}
+                    {{ form.oxygen_saturation(class="form-control", placeholder="e.g., 95") }}
+                    {% if form.oxygen_saturation.errors %}
+                        <div class="text-danger" style="color: var(--danger); margin-top: 0.5rem;">
+                            {% for error in form.oxygen_saturation.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

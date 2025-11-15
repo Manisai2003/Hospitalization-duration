@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>Predicting Hospital Stay Length</h1>
+        <p>Using explainable machine learning to forecast patient hospitalization duration, enabling better resource management and improved care planning.</p>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2><i class="fas fa-info-circle"></i> About Our Project</h2>
+        <p>Our Hospital Stay Length Prediction system uses advanced machine learning techniques to forecast how long a patient might need to stay in the hospital based on their medical condition and personal factors. This helps hospitals optimize bed allocation, plan staff schedules, and improve overall patient care.</p>
+        <p>The system leverages explainable AI to provide transparent insights into prediction factors, ensuring healthcare professionals understand the reasoning behind each forecast.</p>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <h2><i class="fas fa-brain"></i> Explainable AI</h2>
+                <p>Our system doesn't just predict - it explains why. Using SHAP and LIME techniques, we provide transparent insights into prediction factors that influence hospital stay duration.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h2><i class="fas fa-hospital"></i> Clinical Integration</h2>
+                <p>Designed to integrate seamlessly with hospital information systems, providing real-time predictions at the point of care to support clinical decision-making.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h2><i class="fas fa-shield-alt"></i> Privacy Focused</h2>
+                <p>All patient data is anonymized and encrypted, ensuring compliance with HIPAA and other healthcare regulations while maintaining data integrity.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2><i class="fas fa-database"></i> SQLite3 Database Integration</h2>
+        <p>Our application uses SQLite3 as the backend database to securely store:</p>
+        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+            <li>User registration and authentication details</li>
+            <li>Patient medical information and prediction history</li>
+            <li>Medical precautions and recommendations</li>
+            <li>System configuration and settings</li>
+        </ul>
+        <p>This lightweight, serverless database ensures reliability and performance while maintaining data security.</p>
+    </div>
+</div>
+{% endblock %}

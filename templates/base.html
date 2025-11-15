@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hospital Stay Predictor{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' if category == 'danger' else 'info-circle' }}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-hospital-user"></i>
+                <span>Hospital Stay Predictor</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}"><i class="fas fa-home"></i> Home</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('main') }}" class="{% if request.endpoint == 'main' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="{{ url_for('detection') }}" class="{% if request.endpoint == 'detection' %}active{% endif %}"><i class="fas fa-stethoscope"></i> Prediction</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}" class="{% if request.endpoint == 'login' %}active{% endif %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                        <li><a href="{{ url_for('register') }}" class="{% if request.endpoint == 'register' %}active{% endif %}"><i class="fas fa-user-plus"></i> Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>To leverage explainable AI for accurate hospital stay predictions, enabling better resource allocation and improved patient outcomes through data-driven insights.</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>A healthcare system where predictive analytics empowers medical professionals to deliver personalized, efficient care while optimizing hospital resources.</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-flag"></i> Our Goals</h3>
+                    <ul>
+                        <li>Reduce hospital readmission rates by 20%</li>
+                        <li>Optimize bed utilization through accurate forecasting</li>
+                        <li>Improve patient satisfaction scores</li>
+                        <li>Enhance clinical decision-making with explainable AI</li>
+                        <li>Reduce operational costs through efficient resource planning</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-shield-alt"></i> Policies</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-lock"></i> Data Security</a></li>
+                        <li><a href="#"><i class="fas fa-balance-scale"></i> HIPAA Compliance</a></li>
+                        <li><a href="#"><i class="fas fa-gavel"></i> Regulatory Standards</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Hospital Stay Predictor. All rights reserved. | Powered by Explainable AI & SQLite3</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
